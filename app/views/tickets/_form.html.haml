@@ -1,0 +1,23 @@
+= semantic_form_for @ticket do |f|
+  = f.inputs :email, :name, for: :customer
+  = f.inputs :department, :subject, :body
+  = f.actions
+-# = form_for @ticket do |f|
+-#   - if @ticket.errors.any?
+-#     #error_explanation
+-#       %h2= "#{pluralize(@ticket.errors.count, "error")} prohibited this ticket from being saved:"
+-#       %ul
+-#         - @ticket.errors.full_messages.each do |msg|
+-#           %li= msg
+
+-#   .field
+-#     = f.label :subject
+-#     = f.text_field :subject
+-#   .field
+-#     = f.label :body
+-#     = f.text_area :body
+-#   .field
+-#     = f.label :status
+-#     = f.number_field :status
+-#   .actions
+-#     = f.submit 'Save'
