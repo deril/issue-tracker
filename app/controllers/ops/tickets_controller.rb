@@ -1,15 +1,15 @@
 class Ops::TicketsController < ApplicationController
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  before_action :set_ticket, only: [:show, :update]
 
   def index
     @tickets = Ticket.all
   end
 
-  def unassinged
+  def unassigned
     @tickets = Ticket.no_assigned
   end
 
-  def openned
+  def opened
     @tickets = Ticket.opened
   end
 
@@ -24,26 +24,12 @@ class Ops::TicketsController < ApplicationController
   def show
   end
 
-  def new
-    @ticket = Ticket.new
-  end
-
   def edit
-  end
-
-  def create
-    @ticket = Ticket.new(ticket_params)
-
-    if @ticket.save
-      redirect_to [:admin, @ticket], notice: 'Ticket was successfully created.'
-    else
-      render action: 'new'
-    end
   end
 
   def update
     if @ticket.update(ticket_params)
-      redirect_to [:admin, @ticket], notice: 'Ticket was successfully updated.'
+      redirect_to [:ops, @ticket], notice: 'Ticket was successfully updated.'
     else
       render action: 'edit'
     end
@@ -55,6 +41,6 @@ class Ops::TicketsController < ApplicationController
     end
 
     def ticket_params
-      params.require(:ticket).permit(:subject, :body)
+      params.require(:ticket).permit(:subject, :body, :manager_id, :department_id)
     end
 end

@@ -1,12 +1,22 @@
 %p#notice= notice
-
+= semantic_form_for [:ops, @ticket] do |f|
+  = f.input :manager, label: 'Owner'
+  = f.input :department
+  = f.actions
+%p
+  %b Customer Email:
+  = @ticket.customer.email
 %p
   %b Subject:
   = @ticket.subject
 %p
   %b Body:
   = @ticket.body
+%p
+  %b Created At:
+  = @ticket.created_at
+%p
+  %b Updated At:
+  = @ticket.updated_at
 
-= link_to 'Edit', edit_ops_ticket_path(@ticket)
-\|
 = link_to 'Back', ops_tickets_path
