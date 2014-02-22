@@ -1,4 +1,15 @@
 IssueTracker::Application.routes.draw do
+  namespace :ops do
+    resources :tickets do
+      collection do
+        get 'unassigned'
+        get 'opened'
+        get 'holded'
+        get 'closed'
+      end
+    end
+  end
+
   resources :tickets
 
   # The priority is based upon order of creation: first created -> highest priority.

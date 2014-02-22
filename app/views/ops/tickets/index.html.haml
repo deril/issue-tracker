@@ -1,0 +1,27 @@
+%h1 Listing tickets
+= link_to 'New unassigned tickets', unassigned_ops_tickets_path
+= link_to 'Open Tickets', opened_ops_tickets_path
+= link_to 'On hold tickets', holded_ops_tickets_path
+= link_to 'Closed Tickets', closed_ops_tickets_path
+
+%table
+  %tr
+    %th Department
+    %th Status
+    %th Customer Email
+    %th Subject
+    %th
+    %th
+
+  - @tickets.each do |ticket|
+    %tr
+      %td= ticket.department.name
+      %td= ticket.status.name
+      %td= ticket.customer.email
+      %td= ticket.subject
+      %td= link_to 'Show', [:ops, ticket]
+      %td= link_to 'Edit', edit_ops_ticket_path(ticket)
+
+%br
+
+= link_to 'New Ticket', new_ops_ticket_path

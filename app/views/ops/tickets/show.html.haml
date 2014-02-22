@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Subject:
+  = @ticket.subject
+%p
+  %b Body:
+  = @ticket.body
+
+= link_to 'Edit', edit_ops_ticket_path(@ticket)
+\|
+= link_to 'Back', ops_tickets_path
