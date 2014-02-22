@@ -22,6 +22,7 @@ class Ops::TicketsController < ApplicationController
   end
 
   def show
+    @replays = @ticket.replays
   end
 
   def edit

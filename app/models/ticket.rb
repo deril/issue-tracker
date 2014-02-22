@@ -5,6 +5,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :department
   belongs_to :status
   belongs_to :manager
+  has_many :replays
 
   accepts_nested_attributes_for :customer
 

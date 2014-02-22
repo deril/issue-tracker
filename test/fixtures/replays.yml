@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket_id_id: 
+  manager_id_id: 
+  body: MyText
+
+two:
+  ticket_id_id: 
+  manager_id_id: 
+  body: MyText

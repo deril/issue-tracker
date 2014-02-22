@@ -18,5 +18,17 @@
 %p
   %b Updated At:
   = @ticket.updated_at
+%p Replays
+- if @replays
+  - @replays.each do |replay|
+    %p
+      %b Manager
+      = replay.manager.name
+    %p
+      %b Body
+      = replay.body
+= semantic_form_for Replay.new do |f|
+  = f.input :body
+  = f.actions
 
 = link_to 'Back', ops_tickets_path
