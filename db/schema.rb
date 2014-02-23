@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140222222426) do
 
   add_index "managers", ["email"], name: "index_managers_on_email", unique: true
 
-  create_table "replays", force: true do |t|
+  create_table "replies", force: true do |t|
     t.integer  "ticket_id"
     t.integer  "manager_id"
     t.text     "body"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20140222222426) do
     t.datetime "updated_at"
   end
 
-  add_index "replays", ["manager_id"], name: "index_replays_on_manager_id"
-  add_index "replays", ["ticket_id"], name: "index_replays_on_ticket_id"
+  add_index "replies", ["manager_id"], name: "index_replies_on_manager_id"
+  add_index "replies", ["ticket_id"], name: "index_replies_on_ticket_id"
 
   create_table "statuses", force: true do |t|
     t.string   "name"
