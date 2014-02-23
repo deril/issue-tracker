@@ -1,5 +1,6 @@
 class Manager < ActiveRecord::Base
   has_many :tickets
+  has_many :replies, through: :tickets
 
   before_save { self.email = email.downcase }
 

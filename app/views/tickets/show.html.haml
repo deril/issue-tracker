@@ -7,6 +7,17 @@
   %b Body:
   = @ticket.body
 
+%h2 Replies:
+- @ticket.replies.each do |reply|
+  %p
+    %b= reply.manager.nil? ? 'You' : reply.manager.name
+  %p
+    %b Reply:
+    = reply.body
+
 %h2 add a reply:
+= semantic_form_for [@ticket, @ticket.replies.build] do |f|
+  = f.input :body
+  = f.actions
 
 = link_to 'Back', tickets_path

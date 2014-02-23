@@ -18,16 +18,16 @@
 %p
   %b Updated At:
   = @ticket.updated_at
-%p Replays
-- if @replays
-  - @replays.each do |replay|
-    %p
-      %b Manager
-      = replay.manager.name
-    %p
-      %b Body
-      = replay.body
-= semantic_form_for Reply.new do |f|
+%h2 Replies:
+- @ticket.replies.each do |reply|
+  %p
+    %b= reply.manager.nil? ? 'customer' : reply.manager.name
+  %p
+    %b Reply:
+    = reply.body
+
+%h2 add a reply:
+= semantic_form_for [:ops, @ticket, @ticket.replies.build] do |f|
   = f.input :body
   = f.actions
 
