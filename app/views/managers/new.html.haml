@@ -1,0 +1,4 @@
+%h1 Sign up
+= semantic_form_for(@manager) do |f|
+  = f.inputs :name, :email, :password, :password_confirmation
+  = f.actions

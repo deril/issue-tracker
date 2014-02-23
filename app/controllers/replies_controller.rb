@@ -8,6 +8,6 @@ class RepliesController < ApplicationController
 
   private
     def replay_params
-      params.require(:reply).permit(:body, customer_attributes: [:email, :name])
+      params.require(:reply).permit(:body, :manager_id)
     end
 end

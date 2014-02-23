@@ -13,6 +13,8 @@ IssueTracker::Application.routes.draw do
   resources :tickets do
     resources :replies
   end
+  resources :sessions, only: [:new, :create, :destroy]
+  resource :managers
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

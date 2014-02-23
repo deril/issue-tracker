@@ -1,5 +1,6 @@
 class Ops::TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :update]
+  before_action :signed_in_user
 
   def index
     @tickets = Ticket.all
@@ -22,7 +23,7 @@ class Ops::TicketsController < ApplicationController
   end
 
   def show
-    @replays = @ticket.replays
+    @replies = @ticket.replies
   end
 
   def edit
@@ -40,6 +41,10 @@ class Ops::TicketsController < ApplicationController
     def set_ticket
       @ticket = Ticket.find(params[:id])
     end
+
+  def signed_in_user
+    redirect_to new_session_url, notice: "Please sign in." unless signed_in?
+  end
 
     def ticket_params
       params.require(:ticket).permit(:subject, :body, :manager_id, :department_id)

@@ -1,7 +1,7 @@
 class CreateReplies < ActiveRecord::Migration
   def change
     create_table :replies do |t|
-      t.belongs_to :ticket, index: true
+      t.string :ticket_id, index: true
       t.belongs_to :manager, index: true
       t.text :body
 
