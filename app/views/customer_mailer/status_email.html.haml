@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %p
+      Status of yor ticket updated.
+      Now it
+      = @status
+    %p
+      link to your ticket
+      = link_to 'Ticket', ticket_url(@ticket)

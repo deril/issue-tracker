@@ -1,7 +1,7 @@
 %p#notice= notice
 = semantic_form_for [:ops, @ticket] do |f|
   = f.input :manager, label: 'Owner'
-  = f.input :department
+  = f.inputs :department, :status
   = f.actions
 %p
   %b Customer Email:
