@@ -18,8 +18,8 @@ class Ops::TicketsController < ApplicationController
     @tickets = Ticket.closed
   end
 
-  def holded
-    @tickets = Ticket.holded
+  def held
+    @tickets = Ticket.held
   end
 
   def show

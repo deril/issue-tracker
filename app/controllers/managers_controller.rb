@@ -7,7 +7,7 @@ class ManagersController < ApplicationController
     @manager = Manager.new(manager_params)
     if @manager.save
       sign_in @manager
-      redirect_to unassigned_op_ticket_path
+      redirect_to unassigned_ops_ticket_path
     else
       render 'new'
     end

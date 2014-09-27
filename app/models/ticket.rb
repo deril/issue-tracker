@@ -1,5 +1,5 @@
 class Ticket < ActiveRecord::Base
-  self.primary_key = "id"
+  self.primary_key = 'id'
 
   belongs_to :customer
   belongs_to :department
@@ -10,12 +10,12 @@ class Ticket < ActiveRecord::Base
   accepts_nested_attributes_for :customer
 
   before_create :create_uniq_id
-  before_save :update_status
+  after_save :update_status
 
   scope :no_assigned, -> { where(manager_id: nil) }
-  scope :opened, -> { where.not(status_id: [4,5]) }
-  scope :holded, -> { where(status_id: 3) }
-  scope :closed, -> { where(manager_id: [4,5]) }
+  scope :opened, -> { where.not(status_id: [Status::CANCELLED, Status::COMPLETED]) }
+  scope :held, -> { where(status_id: Status::ON_HOLD) }
+  scope :closed, -> { where(status_id: [Status::CANCELLED, Status::COMPLETED]) }
 
   def create_uniq_id
     begin

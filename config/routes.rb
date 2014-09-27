@@ -4,7 +4,7 @@ IssueTracker::Application.routes.draw do
       collection do
         get 'unassigned'
         get 'opened'
-        get 'holded'
+        get 'held'
         get 'closed'
       end
     end

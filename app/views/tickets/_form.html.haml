@@ -1,6 +1,7 @@
 = semantic_form_for @ticket do |f|
   = f.inputs :email, :name, for: :customer
   = f.inputs :department, :subject, :body
+  = f.input :status_id, as: :hidden
   = f.actions
 -# = form_for @ticket do |f|
 -#   - if @ticket.errors.any?

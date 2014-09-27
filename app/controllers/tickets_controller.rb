@@ -11,7 +11,7 @@ class TicketsController < ApplicationController
   def new
     @ticket = Ticket.new
     @ticket.build_customer
-    @ticket.status_id = Status.first.id
+    @ticket.status_id = Status::WAIT_FOR_STAFF
   end
 
   def edit
@@ -35,17 +35,12 @@ class TicketsController < ApplicationController
     end
   end
 
-  def destroy
-    @ticket.destroy
-    redirect_to tickets_url
-  end
-
   private
     def set_ticket
       @ticket = Ticket.find(params[:id])
     end
 
     def ticket_params
-      params.require(:ticket).permit(:department_id, :subject, :body, customer_attributes: [:email, :name])
+      params.require(:ticket).permit(:department_id,  :status_id, :subject, :body, customer_attributes: [:email, :name])
     end
 end
