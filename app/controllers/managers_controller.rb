@@ -1,15 +1,21 @@
 class ManagersController < ApplicationController
+  respond_to :html, :json
+
   def new
-    @manager = Manager.new
+    respond_with @manager = Manager.new
   end
 
   def create
     @manager = Manager.new(manager_params)
     if @manager.save
       sign_in @manager
-      redirect_to unassigned_ops_ticket_path
+      respond_with @manager, status: :created, location: unassigned_ops_ticket_path do |format|
+        format.html { redirect_to unassigned_ops_ticket_path }
+      end
     else
-      render 'new'
+      respond_with @manager.errors, status: :unprocessable_entity do |format|
+        format.html { render action: 'new' }
+      end
     end
   end
 

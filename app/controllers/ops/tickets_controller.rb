@@ -1,39 +1,46 @@
 class Ops::TicketsController < ApplicationController
-  before_action :set_ticket, only: [:show, :update]
+  respond_to :html, :json
+  before_action :set_ticket, only: [:show, :update, :edit]
   before_action :signed_in_user
 
   def index
-    @tickets = Ticket.all
+    respond_with @tickets = Ticket.all
   end
 
   def unassigned
-    @tickets = Ticket.no_assigned
+    respond_with @tickets = Ticket.no_assigned
   end
 
   def opened
-    @tickets = Ticket.opened
+    respond_with @tickets = Ticket.opened
   end
 
   def closed
-    @tickets = Ticket.closed
+    respond_with @tickets = Ticket.closed
   end
 
   def held
-    @tickets = Ticket.held
+    respond_with @tickets = Ticket.held
   end
 
   def show
     @replies = @ticket.replies
+    respond_with @ticket, @replies
   end
 
   def edit
+    respond_with @ticket
   end
 
   def update
     if @ticket.update(ticket_params)
-      redirect_to [:ops, @ticket], notice: 'Ticket was successfully updated.'
+      respond_with @ticket, location: @ticket do |format|
+        format.html { redirect_to [:ops, @ticket], notice: 'Ticket was successfully updated.' }
+      end
     else
-      render action: 'edit'
+      respond_with @ticket.errors, status: :unprocessable_entity do |format|
+        format.html { render action: 'edit' }
+      end
     end
   end
 

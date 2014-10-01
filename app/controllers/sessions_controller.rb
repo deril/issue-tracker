@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  respond_to :html, :json
 
   def new
   end
@@ -7,15 +8,19 @@ class SessionsController < ApplicationController
     manager = Manager.find_by(email: params[:session][:email].downcase)
     if manager && manager.authenticate(params[:session][:password])
       sign_in manager
-      redirect_to unassigned_ops_tickets_url
+      respond_with status: :authorized, location: unassigned_ops_tickets_url do |format|
+        format.html { redirect_to unassigned_ops_tickets_url }
+      end
     else
       flash.now[:error] = 'Invalid email/password combination'
-      render 'new'
+      respond_with status: :unathorized do |format|
+        format.html { render 'new' }
+      end
     end
   end
 
   def destroy
     sign_out
-    redirect_to root_url
+    respond_with location: root_url
   end
 end

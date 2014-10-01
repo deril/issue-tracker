@@ -1,37 +1,49 @@
 class TicketsController < ApplicationController
+  respond_to :html, :json
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tickets = Ticket.all
+    respond_with @tickets = Ticket.all
   end
 
   def show
+    respond_with @ticket
   end
 
   def new
     @ticket = Ticket.new
     @ticket.build_customer
     @ticket.status_id = Status::WAIT_FOR_STAFF
+    respond_with @ticket
   end
 
   def edit
+    respond_with @ticket
   end
 
   def create
     @ticket = Ticket.new(ticket_params)
 
     if @ticket.save
-      redirect_to @ticket, notice: 'Ticket was successfully created.'
+      respond_with @ticket, status: :created, location: @ticket do |format|
+        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
+      end
     else
-      render action: 'new'
+      respond_with @ticket.errors, status: :unprocessable_entity do |format|
+        format.html { render action: 'new' }
+      end
     end
   end
 
   def update
     if @ticket.update(ticket_params)
-      redirect_to @ticket, notice: 'Ticket was successfully updated.'
+      respond_with @ticket, location: @ticket do |format|
+        format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
+      end
     else
-      render action: 'edit'
+      respond_with @ticket.errors, status: :unprocessable_entity do |format|
+        format.html { render action: 'edit' }
+      end
     end
   end
 
